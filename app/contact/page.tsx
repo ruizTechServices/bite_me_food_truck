@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -9,22 +10,18 @@ export default function ContactPage() {
     subject: '',
     message: ''
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // TODO: Replace console.log with Supabase integration
-    // Example Supabase insert:
-    // const { data, error } = await supabase
-    //   .from('contact_submissions')
-    //   .insert([formData]);
-    // if (error) console.error('Error:', error);
-    // else console.log('Success:', data);
-    
     console.log('Form submitted:', formData);
     
-    // Reset form after submission
+    setSubmitted(true);
     setFormData({ name: '', email: '', subject: '', message: '' });
+    
+    setTimeout(() => setSubmitted(false), 3000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -35,13 +32,26 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen py-16 px-4">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
+    <section className="space-y-8">
+      <header className="text-center">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground">
+          Get in <span className="text-brand-gold">Touch</span>
+        </h1>
+        <p className="mt-3 text-muted-foreground">
+          Catering inquiries, feedback, or just want to say hi?
+        </p>
+      </header>
+
+      <div className="mx-auto max-w-xl rounded-2xl border border-border bg-card p-6 shadow-brand sm:p-8">
+        {submitted && (
+          <div className="mb-6 rounded-lg bg-green-500/10 border border-green-500/30 p-4 text-center text-sm text-green-600 dark:text-green-400">
+            Message sent! We&apos;ll get back to you soon.
+          </div>
+        )}
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2">
+            <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
               Name
             </label>
             <input
@@ -51,12 +61,13 @@ export default function ContactPage() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+              placeholder="Your name"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
               Email
             </label>
             <input
@@ -66,12 +77,13 @@ export default function ContactPage() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+              placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="subject" className="block text-sm font-medium mb-2">
+            <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
               Subject
             </label>
             <input
@@ -81,12 +93,13 @@ export default function ContactPage() {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+              placeholder="Catering inquiry, feedback..."
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-2">
+            <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
               Message
             </label>
             <textarea
@@ -95,19 +108,29 @@ export default function ContactPage() {
               value={formData.message}
               onChange={handleChange}
               required
-              rows={6}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              rows={5}
+              className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors resize-none"
+              placeholder="Tell us what's on your mind..."
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
-          >
+          <Button type="submit" size="lg" className="w-full">
             Send Message
-          </button>
+          </Button>
         </form>
+
+        <div className="mt-8 border-t border-border pt-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            Or reach us directly:
+          </p>
+          <a 
+            href="tel:+16466014021" 
+            className="mt-2 inline-block text-lg font-semibold text-brand-orange hover:text-primary transition-colors"
+          >
+            (646) 601-4021
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

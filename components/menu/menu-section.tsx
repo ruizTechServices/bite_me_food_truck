@@ -14,20 +14,28 @@ export default function MenuSectionBlock({ section }: MenuSectionProps) {
   return (
     <section className="space-y-5">
       <div className="space-y-2">
-        <p className="text-xs uppercase tracking-[0.2em] text-amber-400/80">Category</p>
-        <h2 className="text-2xl font-semibold tracking-tight text-white">{section.name}</h2>
-        <hr className="border-slate-800" />
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+          Category
+        </p>
+        <h2 className="text-2xl font-bold tracking-tight text-foreground">
+          {section.name}
+        </h2>
+        <hr className="border-border" />
       </div>
       <ul className="space-y-3">
         {section.items.map((item) => (
           <li
             key={item.id}
-            className="flex flex-col gap-3 rounded-xl border border-slate-800/80 bg-neutral-900/70 p-4 shadow-lg shadow-black/10 md:flex-row md:items-center md:justify-between"
+            className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/30 hover:shadow-brand md:flex-row md:items-center md:justify-between"
           >
             <div className="space-y-1">
-              <div className="text-lg font-semibold text-white">{item.name}</div>
+              <div className="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+                {item.name}
+              </div>
               {item.description ? (
-                <p className="text-sm leading-relaxed text-slate-400">{item.description}</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
               ) : null}
             </div>
             <PriceStack

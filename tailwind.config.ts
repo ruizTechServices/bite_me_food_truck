@@ -44,18 +44,26 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+        // Brand colors - Bite Me Food Truck
+        brand: {
+          navy: "hsl(var(--brand-navy))",
+          gold: "hsl(var(--brand-gold))",
+          orange: "hsl(var(--brand-orange))",
+          cream: "hsl(var(--brand-cream))",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'brand': '0 4px 20px hsl(var(--brand-gold) / 0.15)',
+        'brand-lg': '0 8px 30px hsl(var(--brand-gold) / 0.25)',
+      },
+      backgroundImage: {
+        'brand-gradient': 'linear-gradient(135deg, hsl(var(--brand-navy)) 0%, hsl(220 43% 14%) 100%)',
+        'gold-gradient': 'linear-gradient(135deg, hsl(var(--brand-gold)) 0%, hsl(var(--brand-orange)) 100%)',
       },
     },
   },
