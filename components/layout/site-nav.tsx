@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { AuthButton } from "@/components/auth-button";
 
 export default function SiteNav() {
   return (
@@ -28,12 +29,16 @@ export default function SiteNav() {
         <Link href="/menu" className="hover:text-white hover:underline">
           Menu
         </Link>
-        <a href="mailto:contact@biteme.com" className="hover:text-white hover:underline">
+        <Link href="/contact" className="hover:text-white hover:underline">
           Contact
-        </a>
-        <a href="tel:+16466014021" className="hidden sm:inline hover:text-white hover:underline">
+        </Link>
+        <a
+          href="tel:+16466014021"
+          className="hidden sm:inline hover:text-white hover:underline"
+        >
           (646) 601-4021
         </a>
+        <AuthButton />
       </div>
     </nav>
   );
