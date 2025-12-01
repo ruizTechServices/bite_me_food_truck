@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AuthButton } from "@/components/auth-button";
+import { HamburgerMenu } from "@/components/layout/hamburger-menu";
+import { navItems } from "@/components/layout/nav-items";
 
 export default function SiteNav() {
   return (
@@ -14,8 +16,8 @@ export default function SiteNav() {
               width={64}
               height={64}
               className="h-16 w-16 rounded-full object-cover"
-            priority
-          />
+              priority
+            />
           </Link>
         </div>
         <div>
@@ -25,20 +27,28 @@ export default function SiteNav() {
           </div>
         </div>
       </div>
+      <div className="hidden md:flex items-center gap-4 text-sm text-slate-300">
+        {navItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="hover:text-white hover:underline"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
       <div className="flex items-center gap-4 text-sm text-slate-300">
-        <Link href="/menu" className="hover:text-white hover:underline">
-          Menu
-        </Link>
-        <Link href="/contact" className="hover:text-white hover:underline">
-          Contact
-        </Link>
         <a
           href="tel:+16466014021"
           className="hidden sm:inline hover:text-white hover:underline"
         >
           (646) 601-4021
         </a>
-        <AuthButton />
+        <div className="hidden sm:block">
+          <AuthButton />
+        </div>
+        <HamburgerMenu items={navItems} />
       </div>
     </nav>
   );
